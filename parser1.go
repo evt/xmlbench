@@ -2,21 +2,15 @@ package xmlbench
 
 import (
 	"ag/hotels"
+	"bytes"
 	"encoding/xml"
-	"xmlbench/file"
 )
 
 // Parser1 decodes XML with encoding/xml package
-func Parser1(filePath string) error {
-	// Get file reader
-	fileReader, err := file.GetFileReader(filePath)
-	if err != nil {
-		return err
-	}
-	// Parse XML
-	searchResponse := &hotels.SearchResponse{}
-	decoder := xml.NewDecoder(fileReader)
-	if err := decoder.Decode(searchResponse); err != nil {
+func Parser1(xmlStr []byte) error {
+	v := hotels.SearchResponse{}
+	decoder := xml.NewDecoder(bytes.NewReader(xmlStr))
+	if err := decoder.Decode(&v); err != nil {
 		return err
 	}
 	return nil

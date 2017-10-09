@@ -3,10 +3,11 @@ package file
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 )
 
-// GetFileReader opens XML hotels file and returns reader
+// GetFileReader opens file and returns io.Reader
 func GetFileReader(filePath string) (io.Reader, error) {
 	filePath = os.Getenv("GOPATH") + "/src/xmlbench/file/" + filePath
 	if !fileExists(filePath) {
@@ -17,6 +18,15 @@ func GetFileReader(filePath string) (io.Reader, error) {
 		return nil, err
 	}
 	return file, nil
+}
+
+// GetFileContents reads the file and returns its contents
+func GetFileContents(filePath string) ([]byte, error) {
+	reader, err := GetFileReader(filePath)
+	if err != nil {
+		return nil, err
+	}
+	return ioutil.ReadAll(reader)
 }
 
 // fileExists checks if file exists

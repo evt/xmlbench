@@ -1,20 +1,15 @@
 package xmlbench
 
 import (
-	"xmlbench/file"
+	"bytes"
 
 	"github.com/cvik/xml"
 )
 
-// Parser1 decodes XML with encoding/xml package
-func Parser2(filePath string) error {
-	// Get file reader
-	fileReader, err := file.GetFileReader(filePath)
-	if err != nil {
-		return err
-	}
+// Parser2 decodes XML with cvik/xml package
+func Parser2(xmlStr []byte) error {
 	// Parse XML
-	doc, err := xml.NewParser(fileReader).ParseXML()
+	doc, err := xml.NewParser(bytes.NewReader(xmlStr)).ParseXML()
 	if err != nil {
 		return err
 	}
