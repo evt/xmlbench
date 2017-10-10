@@ -5,11 +5,12 @@ import (
 	"xmlbench/file"
 )
 
-func BenchmarkParser1(b *testing.B) {
+func BenchmarkParsers(b *testing.B) {
 	benchmarks := []struct {
 		xmlFilePath string
 	}{
-		{"1.xml"},
+		{"hotels.xml"},
+		{"flights.xml"},
 	}
 	for _, bm := range benchmarks {
 		// Read file contents
