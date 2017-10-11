@@ -9,8 +9,9 @@ func BenchmarkParsers(b *testing.B) {
 	benchmarks := []struct {
 		xmlFilePath string
 	}{
-		{"hotels.xml"},
-		{"flights.xml"},
+		// {"hotels.xml"},
+		// {"flights.xml"},
+		{"exampleResponse.xml"},
 	}
 	for _, bm := range benchmarks {
 		// Read file contents
@@ -24,6 +25,7 @@ func BenchmarkParsers(b *testing.B) {
 				if err := Parser1(fileContents); err != nil {
 					b.Fatal(err)
 				}
+				// os.Exit(0)
 			}
 		})
 		b.Run(bm.xmlFilePath+"-cvik/xml", func(b *testing.B) {
